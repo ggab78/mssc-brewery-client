@@ -11,14 +11,12 @@ import java.util.UUID;
 
 @Setter
 @Component
-@ConfigurationProperties(value = "sfg.brewery", ignoreInvalidFields = false)
+@ConfigurationProperties(prefix = "sfg.brewery", ignoreInvalidFields = false)
 public class BreweryClient {
-
 
     private static final String BEER_PATH_V1="/api/v1/beer/";
     private String apihost;
     private final RestTemplate restTemplate;
-
 
     public BreweryClient(RestTemplateBuilder restTemplateBuilder) {
     this.restTemplate=restTemplateBuilder.build();
@@ -27,5 +25,4 @@ public class BreweryClient {
     public BeerDto getBeerById(UUID uuid){
         return restTemplate.getForObject(apihost+BEER_PATH_V1+uuid.toString(), BeerDto.class);
     }
-
 }
